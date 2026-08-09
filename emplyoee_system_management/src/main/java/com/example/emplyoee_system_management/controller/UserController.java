@@ -14,11 +14,12 @@ import com.example.emplyoee_system_management.service.UserService;
 @RequestMapping("/users")
 public class UserController {
 	private UserService userService;
+	private OtpVerifyService otpVerifyService;
 	
-	public UserController(UserService userService) {
-		this.userService=userService;
+	public UserController(UserService userService, OtpVerifyService otpVerifyService) {
+		this.userService = userService;
+		this.otpVerifyService = otpVerifyService;
 	}
-	
 	
 	
 	
@@ -35,7 +36,11 @@ public class UserController {
 	}
 	@PostMapping("/verify")
 	public void otpVerification(@RequestBody VerifyOtpRequest verifyOtpRequest) {
-		OtpVerifyService.otpVerifcation(verifyOtpRequest);
+		
+		otpVerifyService.otpVerifcation(verifyOtpRequest);
 	}
+
+
+
 
 }
