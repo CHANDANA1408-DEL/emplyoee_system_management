@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.emplyoee_system_management.dto.RegisterRequest;
+import com.example.emplyoee_system_management.dto.VerifyOtpRequest;
+import com.example.emplyoee_system_management.service.OtpVerifyService;
 import com.example.emplyoee_system_management.service.UserService;
 
 @RestController
@@ -30,6 +32,10 @@ public class UserController {
 		
 	
 		
+	}
+	@PostMapping("/verify")
+	public void otpVerification(@RequestBody VerifyOtpRequest verifyOtpRequest) {
+		OtpVerifyService.otpVerifcation(verifyOtpRequest);
 	}
 
 }
