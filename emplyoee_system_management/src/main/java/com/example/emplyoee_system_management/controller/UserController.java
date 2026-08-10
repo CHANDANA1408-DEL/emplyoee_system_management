@@ -34,12 +34,10 @@ public class UserController {
 	
 		
 	}
-	@PostMapping("/verify")
+	@PostMapping("/verify-otp")
 	public void otpVerification(@RequestBody VerifyOtpRequest verifyOtpRequest) {
 		
-		otpVerifyService.otpVerifcation(verifyOtpRequest);
-	}
-
+		otpVerifyService.otpVerifcation(verifyOtpRequest);}
 
 
 
