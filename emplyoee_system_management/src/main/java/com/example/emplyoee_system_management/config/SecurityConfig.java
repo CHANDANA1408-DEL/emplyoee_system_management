@@ -22,6 +22,10 @@ public class SecurityConfig {
 		 http.csrf(csrf->csrf.disable()).
 		 authorizeHttpRequests(auth->auth.
 		 requestMatchers("/users/register","/users/verify-otp").permitAll().
+		 requestMatchers("HttpMethod.GET","/employees/**").hasAnyRole("ADMIN","USER").
+		 requestMatchers("HttpMethod.POST","/employees/**").hasRole("ADMIN").
+		 requestMatchers("HttpMethod.PUT","/employees/**").hasRole("ADMIN").
+		  requestMatchers("HttpMethod.DELETE","/employees/**").hasRole("ADMIN").
 		requestMatchers("/employees/**").authenticated().
 		anyRequest().authenticated()).
 		 httpBasic(org.springframework.security.config.Customizer.withDefaults());
