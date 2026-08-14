@@ -4,6 +4,7 @@ package com.example.emplyoee_system_management.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -21,11 +22,11 @@ public class SecurityConfig {
 	 SecurityFilterChain securityfilterChain(HttpSecurity http) { 
 		 http.csrf(csrf->csrf.disable()).
 		 authorizeHttpRequests(auth->auth.
-		 requestMatchers("/users/register","/users/verify-otp").permitAll().
-		 requestMatchers("HttpMethod.GET","/employees/**").hasAnyRole("ADMIN","USER").
-		 requestMatchers("HttpMethod.POST","/employees/**").hasRole("ADMIN").
-		 requestMatchers("HttpMethod.PUT","/employees/**").hasRole("ADMIN").
-		  requestMatchers("HttpMethod.DELETE","/employees/**").hasRole("ADMIN").
+		 requestMatchers(HttpMethod.POST,"/users/register","/users/verify-otp").permitAll().
+		 requestMatchers(HttpMethod.GET,"/employees/**").hasAnyRole("ADMIN","USER").
+		 requestMatchers(HttpMethod.POST,"/employees/**").hasRole("ADMIN").
+		 requestMatchers(HttpMethod.PUT,"/employees/**").hasRole("ADMIN").
+		  requestMatchers(HttpMethod.DELETE,"/employees/**").hasRole("ADMIN").
 		requestMatchers("/employees/**").authenticated().
 		anyRequest().authenticated()).
 		 httpBasic(org.springframework.security.config.Customizer.withDefaults());

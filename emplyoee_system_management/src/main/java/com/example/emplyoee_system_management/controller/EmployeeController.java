@@ -22,9 +22,7 @@ class EmployeeController {
 	}
 	@PostMapping
 	public String createEmployee(@RequestBody Employee employee) {
-		return  employeeService.createEmployee(employee);
-		
-		
+		return  employeeService.createEmployee(employee);		
 	}
 	@GetMapping("/{email}")
 	public Employee fetchEmployeeById(@PathVariable String email) {

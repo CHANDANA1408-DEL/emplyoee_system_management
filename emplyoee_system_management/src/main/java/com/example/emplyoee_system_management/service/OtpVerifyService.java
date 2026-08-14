@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.emplyoee_system_management.dto.VerifyOtpRequest;
 import com.example.emplyoee_system_management.entity.User;
+import com.example.emplyoee_system_management.exceptionhandling.InvalidOtpException;
+import com.example.emplyoee_system_management.exceptionhandling.UserNotFoundException;
 import com.example.emplyoee_system_management.repository.UserRepository;
 
 
@@ -24,7 +26,7 @@ public class OtpVerifyService {
 	if(optional.isPresent()) {
 		User user=optional.get();//here fetching previousley stored Database stored email
 		if(!user.getOtp().equals(verifyOtpRequest.getOtp())){
-			return "invalid otp";
+		throw new InvalidOtpException("invalid otp");
 		}
 		if(LocalDateTime.now().isAfter(user.getOtpExpiryTime())){
 			return "otp got expired";
@@ -40,7 +42,7 @@ public class OtpVerifyService {
 		
 	}
 	else {
-		return "user not found with the email"+verifyOtpRequest.getOtp();
+		throw new UserNotFoundException("no user found");
 	}
 	
 	}
